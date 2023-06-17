@@ -34,7 +34,7 @@ total_jobs = int(re.sub("\D", "", driver.find_element(
 count_jobs = 15  # count jobs per Page
 # total_pages = 66  # Maximum number of pages
 total_pages = int(total_jobs // count_jobs + 1)
-total_pages = 4  # number of pages for test
+total_pages = 2  # number of pages for test
 
 print("Total jobs: %d" % total_jobs)
 print("count_jobs: %d" % count_jobs)
@@ -113,6 +113,22 @@ for page in range(0, total_pages):
         else:
             print("verify_job:", is_exists)
             # print("verify_job: ", list(verify_job.items())[:4])
+
+
+# Check some jobs exists in hrflow.ai database (API).
+
+print(" Check some jobs exists in hrflow.ai database: ")
+references = [
+    'job_0aa9dc37ec9aa503',
+    'job_fd3244632c3893c0',
+    'job_ee5cacc50ab8d624'
+]
+
+for ref in references:
+
+    print("=====================")
+    print(f'{ref} : ', c.get_job(ref))
+
 
 print(f"\ndriver process is closing...")
 

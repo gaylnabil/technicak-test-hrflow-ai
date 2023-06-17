@@ -79,6 +79,20 @@ class Crawler:
             "metadatas": [],
         }
 
+    def get_job(self, reference: str) -> dict:
+        """
+        Get Job from reference in database
+
+        Args:
+            reference (str): reference to get job from database
+
+        Returns:
+            dict: Return job from database as JSON Format
+        """
+        return self.client().job.indexing.get(
+            board_key=self._settings["BOARD_KEY"], reference=reference
+        ).get("data")
+
     def is_job_exists(self, reference: str) -> bool:
         """
         Find if the reference of the job is available
@@ -89,9 +103,7 @@ class Crawler:
         Returns:
             bool: True if job exists
         """
-        return self.client().job.indexing.get(
-            board_key=self._settings["BOARD_KEY"], reference=reference
-        ).get("data") is not None
+        return self.get_job(reference) is not None
 
     def save(self, jon_json: dict) -> int:
         """
