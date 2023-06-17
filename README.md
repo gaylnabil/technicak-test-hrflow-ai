@@ -3,7 +3,9 @@
 ## Windows OS: 
 ## 1- Download chromedriver:
 
-Get The last version of the **chromedriver** in the link https://chromedriver.storage.googleapis.com/index.html
+Get The last version of the **chromedriver** in the link: 
+
+https://chromedriver.storage.googleapis.com/index.html
 
 ## 2- Config **chromedriver**:
 
