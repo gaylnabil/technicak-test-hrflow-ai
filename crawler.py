@@ -12,6 +12,12 @@ class Crawler:
     """
 
     def __init__(self, settings: dict):
+        """
+        Initialize the Crawler object with settings specified
+
+        Args:
+            settings (dict): Dictionary of settings to initialize the Crawler
+        """
         PATH = 'C:\chromedriver_win32\chromedriver.exe'
         chrome_options = webdriver.ChromeOptions()
 # "--headless=new": Compatible in Chrome 109 and above
@@ -34,16 +40,21 @@ class Crawler:
                               api_user=self._settings['X_USER_EMAIL'])
 
     def get_driver(self):
+        """
+        Get Chrome Driver object
+        """
         return self._driver
 
     def client(self):
+        """
+        Get Chrome Driver object
+        """
         return self._client
 
     def format_job(self) -> dict:
         """
         Format the scrapped job according to the HrFlow.ai Job format
-        @param driver: Crawler driver
-        @return: job in the HrFlow.ai format of skills
+        @return: job in the HrFlow.ai format of job
         """
         return {
             "name": None,
@@ -69,13 +80,34 @@ class Crawler:
         }
 
     def is_job_exists(self, reference: str) -> bool:
+        """
+        Find if the reference of the job is available
+
+        Args:
+            reference (str): reference to check for job existence
+
+        Returns:
+            bool: True if job exists
+        """
         return self.client().job.indexing.get(
             board_key=self._settings["BOARD_KEY"], reference=reference
         ).get("data") is not None
 
     def save(self, jon_json: dict) -> int:
+        """
+        Save Data format JSON to database hrflow.ai API
+
+        Args:
+            jon_json (dict): JSON representation of data job format 
+
+        Returns:
+            int: return status number of job created 
+        """
         return int(self.client().job.indexing.add_json(
             board_key=self._settings["BOARD_KEY"], job_json=jon_json)['code'])
 
     def close(self):
+        """
+        Quit Chrome Driver 
+        """
         self.get_driver().quit()

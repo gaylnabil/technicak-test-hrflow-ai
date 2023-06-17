@@ -32,11 +32,10 @@ total_jobs = int(re.sub("\D", "", driver.find_element(
     By.CLASS_NAME, "jobsearch-JobCountAndSortPane-jobCount").text))
 
 count_jobs = 15  # count jobs per Page
-
-total_pages = int(total_jobs // count_jobs + 1)
-
 # total_pages = 66  # Maximum number of pages
-total_pages = 3
+total_pages = int(total_jobs // count_jobs + 1)
+total_pages = 4  # number of pages for test
+
 print("Total jobs: %d" % total_jobs)
 print("count_jobs: %d" % count_jobs)
 print("total_pages: %d" % total_pages)
@@ -51,6 +50,7 @@ for page in range(0, total_pages):
 
     tags_jobTitles = driver.find_elements(By.CLASS_NAME, "jcs-JobTitle")
 
+    # Get ID and href attributes of <a /> tags
     links = [{"id": a.get_attribute("id"), "url": a.get_attribute(
         "href")} for a in tags_jobTitles]
 
@@ -86,9 +86,12 @@ for page in range(0, total_pages):
         tags_job.append({"name": "company", "value": driver.find_element(
             By.XPATH, "//*[@data-company-name='true']").text})
 
+        # Get Description
         description = driver.find_element(By.ID, 'jobDescriptionText').text
 
+        # Initial JSON representation of the job
         json_job = c.format_job()
+
         json_job["agent_key"] = reference
         json_job["reference"] = reference
         json_job["name"] = name
