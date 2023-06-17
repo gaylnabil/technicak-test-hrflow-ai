@@ -3,9 +3,7 @@
 ## Windows OS: 
 ## 1- Download chromedriver:
 
-Get The last version of the **chromedriver** in this link:
-
-    https://chromedriver.storage.googleapis.com/index.html
+Get The last version of the **chromedriver** in the link https://chromedriver.storage.googleapis.com/index.html
 
 ## 2- Config **chromedriver**:
 
@@ -16,6 +14,10 @@ Get The last version of the **chromedriver** in this link:
 - create Virtual Environment with command:
         
         python -m venv venv
+
+- Activate the Virtual Environment with command:
+  
+        source venv/Scripts/activate
 
 - install all necessary packages in `requirements.txt`:
   
